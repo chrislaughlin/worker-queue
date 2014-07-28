@@ -9,4 +9,18 @@ describe("Worker Queue Spec", function() {
         expect( function(){ WorkerQueue.createQueue('queue name', 'function'); } ).toThrow(new Error("Processing function must be of type function"));
     });
 
+    it('should process a queue at least once', function() {
+        var value = 0;
+        runs(function() {
+            WorkerQueue.createQueue('test queue', function() {
+                value++;
+            });
+            WorkerQueue.pushItem('test queue', {id: 'test'});
+        });
+
+        waitsFor(function() {
+            return value == 1;
+        },'Worker Queue Should process function', 1000);
+    });
+
 });
