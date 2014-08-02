@@ -41,4 +41,10 @@ london
 bower install worker-queue
 ```
 
+Contributing Code
+-----------------
+
+Worker Queue follows the [Fork & Pull](https://help.github.com/articles/using-pull-requests) model
+for collaborative development. If you would like to see something added or find a bug please create an issue or send a pull request.
+
 
