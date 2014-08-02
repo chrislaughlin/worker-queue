@@ -37,7 +37,11 @@ london
 
 ### Bower
 
+bower install worker-queue
 
+### Node
+
+npm install worker-queue
 
 
 
