@@ -1,6 +1,6 @@
 window.WorkerQueue = (function () {
 
-    var TIMEOUT = 1;
+    var _TIMEOUT = 1000;
     var _queues = {};
 
     var createQueue = function(queueName, processingFunc) {
@@ -34,7 +34,9 @@ window.WorkerQueue = (function () {
     }
 
     function startQueue(queueName) {
-        setInterval(queueProcessor(queueName), TIMEOUT);
+        setInterval(function() {
+            queueProcessor(queueName);
+        }, _TIMEOUT);
     }
 
     return {

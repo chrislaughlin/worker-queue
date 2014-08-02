@@ -11,16 +11,16 @@ describe("Worker Queue Spec", function() {
 
     it('should process a queue at least once', function() {
         var value = 0;
+        WorkerQueue.createQueue('test queue', function() {
+            value = 1;
+        });
         runs(function() {
-            WorkerQueue.createQueue('test queue', function() {
-                value++;
-            });
             WorkerQueue.pushItem('test queue', {id: 'test'});
         });
 
         waitsFor(function() {
             return value == 1;
-        },'Worker Queue Should process function', 1000);
+        },'Worker Queue Should process function', 10000);
     });
 
 });
