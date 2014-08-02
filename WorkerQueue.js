@@ -3,9 +3,9 @@ window.WorkerQueue = (function () {
     var _TIMEOUT = 1000;
     var _queues = {};
 
-    var createQueue = function(queueName, processingFunc) {
+    var createQueue = function(queueName, processingFunc, delay) {
         validateParams(queueName, processingFunc);
-        _queues[queueName] = {processingFun: processingFunc, items:[]};
+        _queues[queueName] = {processingFun: processingFunc, items:[], delay: delay};
         startQueue(queueName);
     };
 
@@ -47,7 +47,7 @@ window.WorkerQueue = (function () {
     function startQueue(queueName) {
         _queues[queueName].interval = setInterval(function() {
             queueProcessor(queueName);
-        }, _TIMEOUT);
+        }, _queues[queueName].delay ? _queues[queueName].delay : _TIMEOUT);
     }
 
     return {
