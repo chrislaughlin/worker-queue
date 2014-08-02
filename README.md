@@ -1,4 +1,4 @@
-worker-queue
+Worker Queue
 ============
 
 JavaScript queue processor, to produce a "multi threaded" defered processor. Create a queue and give it a function that will carry out thr processing. Push items into the queue and the queue will process them using setInterval.
@@ -37,7 +37,8 @@ london
 
 ### Bower
 
+``` bash
 bower install worker-queue
-
+```
 
 
