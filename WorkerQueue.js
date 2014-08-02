@@ -11,10 +11,20 @@ window.WorkerQueue = (function () {
 
     var pushItem = function(queueName, item) {
         if (_queues[queueName]) {
-            _queues[queueName].items.push(item);
+            if (Object.prototype.toString.call(item) === '[object Array]') {
+                for (var i = 0, len = item.length; i < len; i++) {
+                    _queues[queueName].items.push(item[i]);
+                }
+            } else {
+                _queues[queueName].items.push(item);
+            }
         } else {
             throw new Error('No queue for %s', queueName);
         }
+    };
+
+    var destroyQueue = function(queueName) {
+        delete _queues[queueName];
     };
 
     function validateParams(queueName, processingFunc) {
@@ -41,6 +51,7 @@ window.WorkerQueue = (function () {
 
     return {
         createQueue: createQueue,
-        pushItem: pushItem
+        pushItem: pushItem,
+        destroyQueue: destroyQueue
     };
 })();

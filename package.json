@@ -1,6 +1,6 @@
 {
   "name": "worker-queue",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Task runner for multi threaded like processing",
   "main": "index.js",
   "scripts": {
