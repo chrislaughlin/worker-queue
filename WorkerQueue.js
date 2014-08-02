@@ -24,6 +24,7 @@ window.WorkerQueue = (function () {
     };
 
     var destroyQueue = function(queueName) {
+        clearInterval(_queues[queueName].interval);
         delete _queues[queueName];
     };
 
@@ -38,13 +39,13 @@ window.WorkerQueue = (function () {
     }
 
     function queueProcessor(queueName) {
-        if (_queues[queueName].items.length > 0) {
+        if (_queues[queueName] && _queues[queueName].items.length > 0) {
             _queues[queueName].processingFun(_queues[queueName].items.pop());
         }
     }
 
     function startQueue(queueName) {
-        setInterval(function() {
+        _queues[queueName].interval = setInterval(function() {
             queueProcessor(queueName);
         }, _TIMEOUT);
     }
