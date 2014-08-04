@@ -1,4 +1,12 @@
-window.WorkerQueue = (function () {
+(function(root, module) {
+    if (typeof exports == 'object') {
+        module.exports = module();
+    } else if (typeof define == 'function' && define.amd) {
+        define(module);
+    } else {
+        root.WorkerQueue = module();
+    }
+}(this, function() {
 
     var _TIMEOUT = 1000;
     var _queues = {};
@@ -29,11 +37,11 @@ window.WorkerQueue = (function () {
     };
 
     function validateParams(queueName, processingFunc) {
-        if (queueName == null || processingFunc == null) {
+        if (!queueName || !processingFunc) {
             throw new Error('Queue name and function are required');
-        } else if (typeof queueName != 'string') {
+        } else if (typeof queueName !== 'string') {
             throw new Error('Queue name must be a string');
-        } else if (typeof processingFunc != 'function') {
+        } else if (typeof processingFunc !== 'function') {
             throw new Error('Processing function must be of type function');
         }
     }
@@ -55,4 +63,4 @@ window.WorkerQueue = (function () {
         pushItem: pushItem,
         destroyQueue: destroyQueue
     };
-})();
+}));
