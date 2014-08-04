@@ -1,7 +1,7 @@
 (function(root, module) {
-    if (typeof exports == 'object') {
+    if (typeof exports === 'object') {
         module.exports = module();
-    } else if (typeof define == 'function' && define.amd) {
+    } else if (typeof define === 'function' && define.amd) {
         define(module);
     } else {
         root.WorkerQueue = module();
